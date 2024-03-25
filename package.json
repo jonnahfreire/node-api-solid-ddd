@@ -2,17 +2,41 @@
   "name": "api-solid",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start:dev": "nodemon --watch 'src/' --exec ts-node src/index.ts -e ts"
+    "start:dev": "nodemon src/index.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.1.2",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
+    "@jest/globals": "^29.7.0",
+    "@types/node": "^20.11.15",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "dotenv": "^16.4.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
     "nodemon": "^3.0.3",
+    "prettier": "^3.2.4",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
-    "typescript": "^5.3.3"
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/pg-promise": "^5.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "pg-promise": "^11.5.5"
   }
 }
