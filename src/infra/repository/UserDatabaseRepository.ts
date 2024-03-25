@@ -32,7 +32,7 @@ export default class UserDatabaseRepository implements IUserRepository {
     }
 
     async findByEmail(email: string): Promise<User> {
-        const [user] = await this.database.query(`select * from into users where eamil=$1`, [email]);
+        const [user] = await this.database.query(`select * from into users where email=$1`, [email]);
 
         if (!user) throw new Error(`User not found`);
         return User.restore(user.id, user.name, user.email, new Password(user.password, user.salt));
