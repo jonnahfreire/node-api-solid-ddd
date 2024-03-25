@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import IDatabaseConnection from "../database/PgPromiseDatabaseConnection/IDatabaseConnection";
 import User from "../../domain/entity/User";
 import Password from "../../domain/entity/Password";
@@ -15,7 +16,18 @@ export default class UserDatabaseRepository implements IUserRepository {
     }
 
     async findAll(): Promise<User[]> {
-        const users = await this.database.query(`select * from into users`, []);
+        const data = await this.database.query(`select * from into users`, []);
+
+        const users: User[] = [];
+        data.forEach((user: any) => users.push(
+            new User(
+                user.id,
+                user.name,
+                user.email,
+                user.password,
+            )
+        ));
+
         return users;
     }
 
