@@ -9,14 +9,14 @@ export default class UserDatabaseRepository implements IUserRepository {
     constructor(private readonly database: IDatabaseConnection) { }
 
     async find(id: string): Promise<User> {
-        const [user] = await this.database.query(`select * from into users where id=$1`, [id]);
+        const [user] = await this.database.query(`select * from users where id=$1`, [id]);
 
         if (!user) throw new Error(`User not found`);
         return User.restore(user.id, user.name, user.email, new Password(user.password, user.salt));
     }
 
     async findAll(): Promise<User[]> {
-        const data = await this.database.query(`select * from into users`, []);
+        const data = await this.database.query(`select * from users`, []);
 
         const users: User[] = [];
         data.forEach((user: any) => users.push(
