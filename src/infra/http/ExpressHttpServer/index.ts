@@ -1,4 +1,3 @@
-
 import express, { Express } from "express";
 import cors from "cors";
 
@@ -7,9 +6,11 @@ import IHttpServer from "../interfaces/IHttpServer";
 import GetAllUsers from "../../../application/usecase/GetAllUsers";
 import SignIn from "../../../application/usecase/SignIn";
 import SignUp from "../../../application/usecase/SignUp";
-import UserMemoryRepository from "../../repository/memory/UserMemoryRepository";
 import AuthRouter from "./routes/AuthRouter";
 import defaultRoutes from "./routes/default";
+import UserDatabaseRepository from "../../repository/UserDatabaseRepository";
+import IDatabaseConnection from "../../database/IDatabaseConnection";
+import PgPromiseDatabaseConnection from "../../database/PgPromiseDatabaseConnection";
 
 
 export default class ExpressHttpServer implements IHttpServer {
@@ -30,7 +31,8 @@ export default class ExpressHttpServer implements IHttpServer {
         this.server.use('/api', defaultRoutes);
 
         // Auth configuration
-        const userRepository = new UserMemoryRepository();
+        const database: IDatabaseConnection = new PgPromiseDatabaseConnection();
+        const userRepository = new UserDatabaseRepository(database);
         const signin = new SignIn(userRepository);
         const signup = new SignUp(userRepository);
         const authRoutes = new AuthRouter(signin, signup)

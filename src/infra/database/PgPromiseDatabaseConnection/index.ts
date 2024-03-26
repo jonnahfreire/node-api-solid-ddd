@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import pgp from "pg-promise";
-import IDatabaseConnection from "./IDatabaseConnection";
+import IDatabaseConnection from "../IDatabaseConnection";
 
-export default class DatabaseConnection implements IDatabaseConnection {
-    connection: any;
+export default class PgPromiseDatabaseConnection implements IDatabaseConnection {
+    private connection: any;
 
     constructor() {
-        this.connection = pgp()("postgres://postgres:123456@localhost:5432/app");
+        this.connection = pgp()("postgres://postgres:postgres@localhost:5432/nodeapi");
     }
 
     async query(statement: string, params: unknown): Promise<unknown> {
