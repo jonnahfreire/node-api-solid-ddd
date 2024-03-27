@@ -27,5 +27,7 @@ export default class AuthRouter implements IServerRouter {
                 res.status(400).send({ success: false, message: err.message });
             }
         });
+
+        return this;
     }
 }

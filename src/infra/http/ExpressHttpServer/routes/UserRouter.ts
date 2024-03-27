@@ -17,5 +17,7 @@ export default class UserRouter implements IServerRouter {
                 res.status(404).send({ success: false, message: err.message });
             }
         });
+
+        return this;
     }
 }

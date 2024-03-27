@@ -1,21 +1,16 @@
 import express, { Express } from "express";
 import cors from "cors";
 
-import UserRouter from "./routes/UserRouter";
 import IHttpServer from "../interfaces/IHttpServer";
-import GetAllUsers from "../../../application/usecase/GetAllUsers";
-import SignIn from "../../../application/usecase/SignIn";
-import SignUp from "../../../application/usecase/SignUp";
-import AuthRouter from "./routes/AuthRouter";
 import defaultRoutes from "./routes/default";
-import UserDatabaseRepository from "../../repository/UserDatabaseRepository";
-import IDatabaseConnection from "../../database/IDatabaseConnection";
-import PgPromiseDatabaseConnection from "../../database/PgPromiseDatabaseConnection";
+import AuthRouteConfiguration from "./routeConfiguration/AuthRouteConfiguration";
+import UserRouteConfiguration from "./routeConfiguration/UserRouteConfiguration";
+import IUserRepository from "../../../domain/repository/IUserRepository";
 
 
 export default class ExpressHttpServer implements IHttpServer {
     server: Express;
-    constructor() {
+    constructor(private readonly userRepository: IUserRepository) {
         this.server = express();
         this.configureMiddlewares();
         this.configureRoutes();
@@ -29,21 +24,8 @@ export default class ExpressHttpServer implements IHttpServer {
 
     configureRoutes(): void {
         this.server.use('/api', defaultRoutes);
-
-        // Auth configuration
-        const database: IDatabaseConnection = new PgPromiseDatabaseConnection();
-        const userRepository = new UserDatabaseRepository(database);
-        const signin = new SignIn(userRepository);
-        const signup = new SignUp(userRepository);
-        const authRoutes = new AuthRouter(signin, signup)
-        authRoutes.configure();
-        this.server.use('/api/auth', authRoutes.router);
-
-        // User configuration
-        const getAllUsers = new GetAllUsers(userRepository);
-        const userRoutes = new UserRouter(getAllUsers);
-        userRoutes.configure();
-        this.server.use('/api/users', userRoutes.router);
+        this.server.use('/api/auth', new AuthRouteConfiguration(this.userRepository).getRouter());
+        this.server.use('/api/users', new UserRouteConfiguration(this.userRepository).getRouter());
     }
 
     listen(port: number): void {

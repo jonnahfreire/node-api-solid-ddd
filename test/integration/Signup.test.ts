@@ -8,17 +8,17 @@ describe('Integration', () => {
         email: 'john.doe@gmail.com',
         password: '12345678'
     }
-    
-    beforeEach(async() => {
+
+    beforeEach(async () => {
         const signup = new SignUp(memoryRepository);
         await signup.execute(signupInput);
     });
-    
+
     test('Deve buscar um usuário por email', async () => {
         const user = await memoryRepository.findByEmail(signupInput.email);
         expect(user).toBeDefined();
     });
-    
+
     test('Deve validar a senha de usuário', async () => {
         const user = await memoryRepository.findByEmail(signupInput.email);
         const userPasswordIsValid = await user.password.validate('12345678');

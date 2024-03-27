@@ -6,7 +6,6 @@ export default class SignIn implements IUseCase {
 
     async execute(input: Input): Promise<Output> {
         const user = await this.userRepository.findByEmail(input.email);
-        if (!user) throw new Error("User not found");
 
         const passwordIsValid = await user.validatePassword(input.password);
         if (!passwordIsValid) throw new Error("Invalid password");
