@@ -13,13 +13,14 @@ export default class SequelizeDatabaseConnection implements IDatabaseConnection 
             username: 'postgres',
             password: 'postgres',
             database: 'nodeapi',
+            logging: false,
         });
     }
     async query(statement: string, params?: any): Promise<any> {
         if (params?.length) {
-            return await this.connection.query({ query: statement, values: params }, { logging: false });
+            return await this.connection.query({ query: statement, values: params });
         }
-        return await this.connection.query(statement, { logging: false });
+        return await this.connection.query({ query: statement, values: [] });
     }
 
     async close(): Promise<void> {

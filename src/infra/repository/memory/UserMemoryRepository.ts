@@ -12,7 +12,7 @@ export default class UserMemoryRepository implements IUserRepository {
     }
 
     async findByEmail(email: string): Promise<User> {
-        const user = this.users.find(user => user.email.getValue() === email);
+        const user = this.users.find(user => user.email.value === email);
         if (!user) throw new Error(`User not found`);
         return user;
     }

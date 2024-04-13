@@ -12,8 +12,8 @@ export default class SignIn implements IUseCase {
 
         return {
             id: user.id,
-            name: user.name.getValue(),
-            email: user.email.getValue(),
+            name: user.name.value,
+            email: user.email.value,
         };
     }
 }

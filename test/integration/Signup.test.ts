@@ -29,7 +29,6 @@ describe('Integration', () => {
     });
 
     test('Deve retornar exceção ao buscar um usuário com email inválido', async () => {
-        const memoryRepository = new UserMemoryRepository();
         expect(async () => await memoryRepository.findByEmail('john.doe@gmail')).rejects.toThrow('User not found');
     });
 
