@@ -1,5 +1,5 @@
-import IDatabaseConnection from '../../src/infra/database/IDatabaseConnection';
-import PgPromiseDatabaseConnection from '../../src/infra/database/PgPromiseDatabaseConnection';
+import IDatabaseConnection from '../../../src/infra/database/IDatabaseConnection';
+import PgPromiseDatabaseConnection from '../../../src/infra/database/PgPromiseDatabaseConnection';
 
 describe('PgPromiseDatabaseConnection test', () => {
     let db: IDatabaseConnection;

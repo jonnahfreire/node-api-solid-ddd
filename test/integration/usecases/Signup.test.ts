@@ -1,5 +1,5 @@
-import UserMemoryRepository from "../../src/infra/repository/memory/UserMemoryRepository";
-import SignUp from "../../src/application/usecase/SignUp";
+import UserMemoryRepository from "../../../src/infra/repository/memory/UserMemoryRepository";
+import SignUp from "../../../src/application/usecase/SignUp";
 
 describe('Integration', () => {
     const memoryRepository = new UserMemoryRepository();

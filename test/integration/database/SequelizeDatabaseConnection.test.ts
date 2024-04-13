@@ -1,5 +1,5 @@
-import IDatabaseConnection from '../../src/infra/database/IDatabaseConnection';
-import SequelizeDatabaseConnection from '../../src/infra/database/SequelizeDatabaseConnection';
+import IDatabaseConnection from '../../../src/infra/database/IDatabaseConnection';
+import SequelizeDatabaseConnection from '../../../src/infra/database/SequelizeDatabaseConnection';
 
 describe('SequelizeDatabaseConnection test', () => {
     let db: IDatabaseConnection;
