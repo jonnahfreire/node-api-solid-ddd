@@ -1,5 +1,6 @@
-import User from "../entity/User";
-import { AbstractSpecification } from "./ISpecification";
+import User from "../entity/user.entity";
+import { AbstractSpecification } from "../../@shared/specification/ISpecification";
+
 
 export default class UserNameSpecification extends AbstractSpecification<User> {
 

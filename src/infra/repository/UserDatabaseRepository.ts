@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import IDatabaseConnection from "../database/IDatabaseConnection";
-import User from "../../domain/entity/User";
-import IUserRepository from "../../domain/repository/IUserRepository";
+import User from "../../domain/user/entity/user.entity";
+import IUserRepository from "../../domain/user/repository/IUserRepository";
 import PgPromiseDatabaseConnection from "../database/PgPromiseDatabaseConnection";
 
 export default class UserDatabaseRepository implements IUserRepository {
@@ -30,18 +30,8 @@ export default class UserDatabaseRepository implements IUserRepository {
         return users;
     }
 
-    async findByEmail(email: string): Promise<User> {
-        const result = await this.database.query(`select * from users where email='${email}'`);
-        if (result.length > 0) {
-            const user = result[0];
-            return User.restore(user.id, user.name, user.email);
-        }
 
-        await this.database.close();
-        throw new Error(`User not found`);
-    }
-
-    async save(user: User): Promise<void> {
+    async create(user: User): Promise<void> {
         await this.database.query(`
             insert into users ("id", "name", "email", "password", "salt") 
                 values (
@@ -51,6 +41,18 @@ export default class UserDatabaseRepository implements IUserRepository {
                     '${user.password.value}', 
                     '${user.password.salt}'
                 )`,
+        );
+
+        await this.database.close();
+    }
+
+    async update(user: User): Promise<void> {
+        await this.database.query(`
+            update users 
+                set "name" = '${user.name.value}', 
+                set "email" = '${user.email.value}', 
+                set "password" = '${user.password.value}', 
+                where id = '${user.id}'`,
         );
 
         await this.database.close();

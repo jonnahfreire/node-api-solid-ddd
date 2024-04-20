@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
-import Email from "./Email";
-import Name from "./Name";
-import Password from "./Password";
+import Email from "../value-object/Email";
+import Name from "../value-object/Name";
+import Password from "../value-object/Password";
 
 export default class User {
     private constructor(

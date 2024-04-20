@@ -5,12 +5,13 @@ import IHttpServer from "../interfaces/IHttpServer";
 import defaultRoutes from "./routes/default";
 import AuthRouteConfiguration from "./routeConfiguration/AuthRouteConfiguration";
 import UserRouteConfiguration from "./routeConfiguration/UserRouteConfiguration";
-import IUserRepository from "../../../domain/repository/IUserRepository";
-
+import IUserRepository from "../../../domain/user/repository/IUserRepository";
 
 export default class ExpressHttpServer implements IHttpServer {
     server: Express;
-    constructor(private readonly userRepository: IUserRepository) {
+    constructor(
+        private readonly userRepository: IUserRepository,
+    ) {
         this.server = express();
         this.configureMiddlewares();
         this.configureRoutes();

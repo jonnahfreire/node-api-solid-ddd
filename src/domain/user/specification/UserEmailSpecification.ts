@@ -1,6 +1,6 @@
 
-import User from "../entity/User";
-import { AbstractSpecification } from "./ISpecification";
+import { AbstractSpecification } from "../../@shared/specification/ISpecification";
+import User from "../entity/user.entity";
 
 export default class UserEmailSpecification extends AbstractSpecification<User> {
 	isSatisfiedBy(user: User): boolean {

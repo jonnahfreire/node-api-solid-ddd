@@ -1,4 +1,4 @@
-import IUserRepository from "../../domain/repository/IUserRepository";
+import IUserRepository from "../../domain/user/repository/IUserRepository";
 import IUseCase from "./IUseCase";
 
 export default class SignIn implements IUseCase {
