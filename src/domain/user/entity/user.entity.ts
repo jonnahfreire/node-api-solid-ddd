@@ -8,15 +8,15 @@ export default class User {
         readonly id: string,
         readonly name: Name,
         readonly email: Email,
-        readonly password: Password = new Password('', '')
+        readonly password: Password
     ) { }
 
     static async create(name: string, email: string, password: string): Promise<User> {
         return new User(randomUUID(), new Name(name), new Email(email), await Password.create(password));
     }
 
-    static restore(id: string, name: string, email: string): User {
-        return new User(id, new Name(name), new Email(email));
+    static async restore(id: string, name: string, email: string, password: string, salt: string): Promise<User> {
+        return new User(id, new Name(name), new Email(email), new Password(password, salt));
     }
 
     async validatePassword(password: string) {

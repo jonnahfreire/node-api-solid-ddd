@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Sequelize } from 'sequelize';
 import IDatabaseConnection from '../IDatabaseConnection';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class SequelizeDatabaseConnection implements IDatabaseConnection {
     connection: Sequelize;
 

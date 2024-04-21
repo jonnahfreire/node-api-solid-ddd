@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import IDatabaseConnection from '../../../src/infra/database/IDatabaseConnection';
 import SequelizeDatabaseConnection from '../../../src/infra/database/SequelizeDatabaseConnection';
 
@@ -15,6 +17,7 @@ describe('SequelizeDatabaseConnection test', () => {
 
     test('Deve buscar a lista de usuários se houver', async () => {
         const [users] = await db.connection.query('SELECT * FROM users');
+        console.log(users);
         expect(users).toBeDefined();
     });
 

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from "express";
+import IServerRouter from "../../interfaces/IServerRouter";
 import SignIn from "../../../../application/usecase/SignIn";
 import SignUp from "../../../../application/usecase/SignUp";
-import IServerRouter from "../../interfaces/IServerRouter";
 
 export default class AuthRouter implements IServerRouter {
     router: Router = Router();

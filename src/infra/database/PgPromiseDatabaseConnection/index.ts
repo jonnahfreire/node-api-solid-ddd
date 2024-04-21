@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import pgp from "pg-promise";
 import IDatabaseConnection from "../IDatabaseConnection";
+import { injectable } from "inversify";
 
+@injectable()
 export default class PgPromiseDatabaseConnection implements IDatabaseConnection {
     public connection: any;
 

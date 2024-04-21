@@ -2,7 +2,7 @@ import IEventDispatcher from "../../src/domain/@shared/event/IEventDispatcher";
 import IEventHandler from "../../src/domain/@shared/event/IEventHandler";
 import UserCreatedEvent from "../../src/domain/user/event/UserCreatedEvent";
 import EventDispatcher from "../../src/domain/@shared/event/EventDispatcher";
-import SendEmailWhenUserIsCreatedHandler from "../../src/domain/user/event/handlers/SendEmailWhenUserIsCreated";
+import SendEmailWhenUserIsCreatedHandler from "../../src/domain/user/event/handlers/SendEmailWhenUserIsCreatedHandler";
 import UserMemoryRepository from "../../src/infra/repository/memory/UserMemoryRepository";
 import SignUp from "../../src/application/usecase/SignUp";
 

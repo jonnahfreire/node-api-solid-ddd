@@ -1,8 +1,7 @@
 import User from "../../domain/user/entity/user.entity";
 import IUserRepository from "../../domain/user/repository/IUserRepository";
-import IUseCase from "./IUseCase";
 
-export default class SignUp implements IUseCase {
+export default class SignUp {
     constructor(private readonly userRepository: IUserRepository) { }
 
     async execute(input: Input): Promise<Output> {
