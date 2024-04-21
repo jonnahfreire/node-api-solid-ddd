@@ -2,8 +2,7 @@ import { pbkdf2, randomBytes } from "crypto";
 
 export default class Password {
 
-    constructor(readonly value: string, readonly salt: string) {
-    }
+    constructor(readonly value: string, readonly salt: string) { }
 
     static create(password: string, salt?: string): Promise<Password> {
         if (password.length < 8) throw new Error("Invalid password. Must be at least 8 characters");
