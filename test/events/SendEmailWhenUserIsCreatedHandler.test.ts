@@ -4,7 +4,7 @@ import UserCreatedEvent from "../../src/domain/user/event/UserCreatedEvent";
 import EventDispatcher from "../../src/domain/@shared/event/EventDispatcher";
 import SendEmailWhenUserIsCreatedHandler from "../../src/domain/user/event/handlers/SendEmailWhenUserIsCreatedHandler";
 import UserMemoryRepository from "../../src/infra/repository/memory/UserMemoryRepository";
-import SignUp from "../../src/application/usecase/SignUp";
+import SignUpUseCase from "../../src/application/usecase/SignUp";
 
 describe('Domains Events Test | Dispatchers | Handlers', () => {
     let eventDispatcher: IEventDispatcher;
@@ -23,7 +23,7 @@ describe('Domains Events Test | Dispatchers | Handlers', () => {
 
     test('should notify when an event ocurred', async () => {
         const userMemoryRepository = new UserMemoryRepository();
-        const signup = new SignUp(userMemoryRepository);
+        const signup = new SignUpUseCase(userMemoryRepository);
         const user = await signup.execute({
             name: 'John Doe',
             email: 'john.doe@gmail.com',

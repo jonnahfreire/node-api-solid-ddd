@@ -1,5 +1,5 @@
 import UserMemoryRepository from "../../../src/infra/repository/memory/UserMemoryRepository";
-import SignUp from "../../../src/application/usecase/SignUp";
+import SignUpUseCase from "../../../src/application/usecase/SignUp";
 
 describe('Integration', () => {
     const memoryRepository = new UserMemoryRepository();
@@ -16,7 +16,7 @@ describe('Integration', () => {
     }
 
     beforeEach(async () => {
-        const signup = new SignUp(memoryRepository);
+        const signup = new SignUpUseCase(memoryRepository);
         createdUser = await signup.execute(signupInput);
     });
 

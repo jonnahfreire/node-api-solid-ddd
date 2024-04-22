@@ -5,16 +5,16 @@ import IHttpServer from "../interfaces/IHttpServer";
 import defaultRoutes from "./routes/default";
 import AuthRouteConfiguration from "./routeConfiguration/AuthRouteConfiguration";
 import UserRouteConfiguration from "./routeConfiguration/UserRouteConfiguration";
-import IUserRepository from "../../../domain/user/repository/IUserRepository";
-import SignIn from "../../../application/usecase/SignIn";
-import SignUp from "../../../application/usecase/SignUp";
+import SignInUseCase from "../../../application/usecase/SignIn";
+import SignUpUseCase from "../../../application/usecase/SignUp";
+import GetAllUsersUseCase from "../../../application/usecase/GetAllUsers";
 
 export default class ExpressHttpServer implements IHttpServer {
     server: Express;
     constructor(
-        private readonly userRepository: IUserRepository,
-        private readonly signin: SignIn,
-        private readonly signup: SignUp,
+        private readonly getAllUsersUseCase: GetAllUsersUseCase,
+        private readonly signinUseCase: SignInUseCase,
+        private readonly signupUseCase: SignUpUseCase,
     ) {
         this.server = express();
         this.configureMiddlewares();
@@ -29,8 +29,8 @@ export default class ExpressHttpServer implements IHttpServer {
 
     configureRoutes(): void {
         this.server.use('/api', defaultRoutes);
-        this.server.use('/api/auth', new AuthRouteConfiguration(this.signin, this.signup).getRouter());
-        this.server.use('/api/users', new UserRouteConfiguration(this.userRepository).getRouter());
+        this.server.use('/api/auth', new AuthRouteConfiguration(this.signinUseCase, this.signupUseCase).getRouter());
+        this.server.use('/api/users', new UserRouteConfiguration(this.getAllUsersUseCase).getRouter());
     }
 
     listen(port: number): void {

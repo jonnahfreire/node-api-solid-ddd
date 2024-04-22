@@ -1,6 +1,6 @@
 import IUserRepository from "../../domain/user/repository/IUserRepository";
 
-export default class SignIn {
+export default class SignInUseCase {
     constructor(private readonly userRepository: IUserRepository) { }
 
     async execute(input: Input): Promise<Output> {

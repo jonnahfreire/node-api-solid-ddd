@@ -2,11 +2,11 @@ import "reflect-metadata";
 import { Container } from "inversify";
 import IDatabaseConnection from "./database/IDatabaseConnection";
 import IUserRepository from "../domain/user/repository/IUserRepository";
-import SignIn from "../application/usecase/SignIn";
-import SignUp from "../application/usecase/SignUp";
-import GetAllUsers from "../application/usecase/GetAllUsers";
+import SignInUseCase from "../application/usecase/SignIn";
+import SignUpUseCase from "../application/usecase/SignUp";
+import GetAllUsersUseCase from "../application/usecase/GetAllUsers";
 import SequelizeDatabaseConnection from "./database/SequelizeDatabaseConnection";
-import { RepositoryInstanceResolver } from "./repository/UserRepositoryFactory";
+import { RepositoryInstanceResolver } from "./repository/RepositoryInstanceResolver";
 // import PgPromiseDatabaseConnection from "./database/PgPromiseDatabaseConnection";
 
 
@@ -26,17 +26,17 @@ container.bind<IDatabaseConnection>(Registry.DatabaseConnection).toConstantValue
 container.bind<IUserRepository>(Registry.UserRepository).toConstantValue(RepositoryInstanceResolver.resolve());
 
 // Use Cases
-container.bind<SignIn>(Registry.SigninUseCase).toDynamicValue((context) => {
+container.bind<SignInUseCase>(Registry.SigninUseCase).toDynamicValue((context) => {
     const repo = context.container.get<IUserRepository>(Registry.UserRepository);
-    return new SignIn(repo);
+    return new SignInUseCase(repo);
 }).inSingletonScope();
 
-container.bind<SignUp>(Registry.SignupUseCase).toDynamicValue((context) => {
+container.bind<SignUpUseCase>(Registry.SignupUseCase).toDynamicValue((context) => {
     const repo = context.container.get<IUserRepository>(Registry.UserRepository);
-    return new SignUp(repo);
+    return new SignUpUseCase(repo);
 }).inSingletonScope();
 
-container.bind<GetAllUsers>(Registry.GetAllUsersUseCase).toDynamicValue((context) => {
+container.bind<GetAllUsersUseCase>(Registry.GetAllUsersUseCase).toDynamicValue((context) => {
     const repo = context.container.get<IUserRepository>(Registry.UserRepository);
-    return new GetAllUsers(repo);
+    return new GetAllUsersUseCase(repo);
 }).inSingletonScope();

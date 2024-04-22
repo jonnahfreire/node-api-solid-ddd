@@ -1,5 +1,5 @@
 import IUserRepository from "../../domain/user/repository/IUserRepository";
-export default class GetAllUsers {
+export default class GetAllUsersUseCase {
     constructor(private readonly userRepository: IUserRepository) { }
 
     async execute(): Promise<Output[]> {

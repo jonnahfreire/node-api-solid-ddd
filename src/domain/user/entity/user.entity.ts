@@ -19,7 +19,7 @@ export default class User {
         return new User(id, new Name(name), new Email(email), new Password(password, salt));
     }
 
-    async validatePassword(password: string) {
+    async validatePassword(password: string): Promise<boolean> {
         return this.password?.validate(password);
     }
 }

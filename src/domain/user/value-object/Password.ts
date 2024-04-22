@@ -14,7 +14,7 @@ export default class Password {
         });
     }
 
-    async validate(plainPassword: string) {
+    async validate(plainPassword: string): Promise<boolean> {
         return new Promise((resolve) => {
             pbkdf2(plainPassword, this.salt, 100, 64, "sha512", (error, value) => {
                 resolve(this.value === value.toString("hex"));
