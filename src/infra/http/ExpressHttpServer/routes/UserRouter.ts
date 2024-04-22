@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from "express";
-import GetAllUsersUseCase from "../../../../application/usecase/GetAllUsers";
+import ListUsersUseCase from "../../../../application/usecase/user/ListUsersUseCase";
 import IServerRouter from "../../interfaces/IServerRouter";
 
 export default class UserRouter implements IServerRouter {
     router: Router = Router();
 
-    constructor(private readonly getAllUsers: GetAllUsersUseCase) { }
+    constructor(private readonly getAllUsers: ListUsersUseCase) { }
 
     configure() {
         this.router.get('/', async (__, res) => {

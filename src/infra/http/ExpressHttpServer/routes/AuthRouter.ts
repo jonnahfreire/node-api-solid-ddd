@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from "express";
 import IServerRouter from "../../interfaces/IServerRouter";
-import SignInUseCase from "../../../../application/usecase/SignIn";
-import SignUpUseCase from "../../../../application/usecase/SignUp";
+import SigninUseCase from "../../../../application/usecase/auth/SigninUsecase";
+import SignupUseCase from "../../../../application/usecase/auth/SignupUseCase";
 
 export default class AuthRouter implements IServerRouter {
     router: Router = Router();
 
-    constructor(private readonly signin: SignInUseCase, private readonly signup: SignUpUseCase) { }
+    constructor(private readonly signin: SigninUseCase, private readonly signup: SignupUseCase) { }
 
     configure() {
         this.router.post('/login', async (req, res) => {

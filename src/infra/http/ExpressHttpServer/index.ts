@@ -5,16 +5,16 @@ import IHttpServer from "../interfaces/IHttpServer";
 import defaultRoutes from "./routes/default";
 import AuthRouteConfiguration from "./routeConfiguration/AuthRouteConfiguration";
 import UserRouteConfiguration from "./routeConfiguration/UserRouteConfiguration";
-import SignInUseCase from "../../../application/usecase/SignIn";
-import SignUpUseCase from "../../../application/usecase/SignUp";
-import GetAllUsersUseCase from "../../../application/usecase/GetAllUsers";
+import SigninUseCase from "../../../application/usecase/auth/SigninUsecase";
+import SignupUseCase from "../../../application/usecase/auth/SignupUseCase";
+import ListUsersUseCase from "../../../application/usecase/user/ListUsersUseCase";
 
 export default class ExpressHttpServer implements IHttpServer {
     server: Express;
     constructor(
-        private readonly getAllUsersUseCase: GetAllUsersUseCase,
-        private readonly signinUseCase: SignInUseCase,
-        private readonly signupUseCase: SignUpUseCase,
+        private readonly getAllUsersUseCase: ListUsersUseCase,
+        private readonly signinUseCase: SigninUseCase,
+        private readonly signupUseCase: SignupUseCase,
     ) {
         this.server = express();
         this.configureMiddlewares();

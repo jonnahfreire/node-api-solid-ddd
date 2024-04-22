@@ -1,14 +1,17 @@
-import IUserRepository from "../../domain/user/repository/IUserRepository";
-export default class GetAllUsersUseCase {
+import IUserRepository from "../../../domain/user/repository/IUserRepository";
+import IUseCase from "../IUseCase";
+
+type ListUsersUseCaseInputProps = void;
+
+export default class ListUsersUseCase implements IUseCase<ListUsersUseCaseInputProps, Output[]> {
     constructor(private readonly userRepository: IUserRepository) { }
 
-    async execute(): Promise<Output[]> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async execute(_input: void): Promise<Output[]> {
         const data = await this.userRepository.findAll();
-
         if (!data.length) throw new Error('No users found');
 
-        const users: Output[] = [];
-        data.forEach(user => users.push(
+        const users: Output[] = data.map(user => (
             {
                 id: user.id,
                 name: user.name.value,

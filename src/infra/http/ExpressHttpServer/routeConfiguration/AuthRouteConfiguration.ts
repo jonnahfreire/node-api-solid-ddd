@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import SignInUseCase from "../../../../application/usecase/SignIn";
-import SignUpUseCase from "../../../../application/usecase/SignUp";
+import SigninUseCase from "../../../../application/usecase/auth/SigninUsecase";
+import SignupUseCase from "../../../../application/usecase/auth/SignupUseCase";
 import AuthRouter from "../routes/AuthRouter";
 import IRouteConfiguration from "../../interfaces/IRouteConfiguration";
 
 export default class AuthRouteConfiguration implements IRouteConfiguration {
     private readonly router: any;
     constructor(
-        private readonly signinUseCase: SignInUseCase,
-        private readonly signupUseCase: SignUpUseCase
+        private readonly signinUseCase: SigninUseCase,
+        private readonly signupUseCase: SignupUseCase
     ) {
         const authRouter = new AuthRouter(this.signinUseCase, this.signupUseCase);
         authRouter.configure();

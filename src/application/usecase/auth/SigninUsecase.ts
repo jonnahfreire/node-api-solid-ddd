@@ -1,6 +1,8 @@
-import IUserRepository from "../../domain/user/repository/IUserRepository";
+import { randomUUID } from "crypto";
+import IUserRepository from "../../../domain/user/repository/IUserRepository";
+import IUseCase from "../IUseCase";
 
-export default class SignInUseCase {
+export default class SigninUseCase implements IUseCase<Input, Output> {
     constructor(private readonly userRepository: IUserRepository) { }
 
     async execute(input: Input): Promise<Output> {
@@ -15,6 +17,7 @@ export default class SignInUseCase {
             id: user.id,
             name: user.name.value,
             email: user.email.value,
+            token: randomUUID()
         };
     }
 }
@@ -28,4 +31,5 @@ type Output = {
     id: string,
     name: string,
     email: string,
+    token: string,
 }
